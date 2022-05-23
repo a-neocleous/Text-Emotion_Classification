@@ -15,7 +15,14 @@ from sklearn import svm
 
 
 
-def train_test(train,test):
+def train_test(train_csv,test_csv):
+    
+    #Getting the names of the files and creating the DataFrames
+    train_set_name = train_csv.name
+    test_set_name = test_csv.name
+    train  = pd.read_csv(train_set_name)
+    test = pd.read_csv(test_set_name)
+    
     #Cleaning our training data
     train['clean_text'] = train['text'].apply(nfx.remove_stopwords)
     train['clean_text'] = train['clean_text'].apply(nfx.remove_punctuations)
@@ -28,7 +35,6 @@ def train_test(train,test):
     X = cv.fit_transform(Xfeatures)
     X.toarray()
     x_train = X
-    
     
     #Build and train our model
     svm_model = svm.SVC(kernel='linear', break_ties=True)
