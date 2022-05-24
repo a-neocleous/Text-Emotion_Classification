@@ -14,14 +14,11 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn import svm
 
 
-
 def train_test(train_csv,test_csv):
     
-    #Getting the names of the files and creating the DataFrames
-    train_set_name = train_csv.name
-    test_set_name = test_csv.name
-    train  = pd.read_csv(train_set_name)
-    test = pd.read_csv(test_set_name)
+    #Creating DataFrames from the paths of the file provided as arguments
+    train  = pd.read_csv(train_csv)
+    test = pd.read_csv(test_csv)
     
     #Cleaning our training data
     train['clean_text'] = train['text'].apply(nfx.remove_stopwords)
